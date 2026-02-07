@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  stock-advisor:
+    build: .
+    container_name: ai-stock-advisor
+    ports:
+      - "8501:8501"
+    environment:
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY:-your-api-key-here}
+    volumes:
+      - ./data_cache:/app/data_cache    # 缓存持久化
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
